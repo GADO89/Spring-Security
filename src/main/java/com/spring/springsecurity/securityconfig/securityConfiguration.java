@@ -20,7 +20,7 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("karim").password(passwordEncoder().encode("karim123")).roles("USER")
                 .and()
-                .withUser("gado").password(passwordEncoder().encode("gado123")).roles("USER");
+                .withUser("yasser").password(passwordEncoder().encode("yasser123")).roles("MANGER");
 
 
 
@@ -30,8 +30,13 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     http
             .authorizeRequests()
-            .anyRequest()
-            .authenticated()
+
+            .antMatchers("/api/main").permitAll()
+            .antMatchers("/api/profile").authenticated()
+            .antMatchers("/api/admin/**").hasRole("ADMIN")
+            .antMatchers("/api/manage").hasAnyRole("ADMIN","MANGER")
+
+            //.anyRequest().authenticated()
             .and()
             .httpBasic();
 
