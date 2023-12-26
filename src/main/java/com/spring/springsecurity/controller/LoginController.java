@@ -9,22 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class LoginController {
 
-    @GetMapping("/main")
+    @GetMapping("/login")
     public String login(){
-        return "index";
-    }
-    @GetMapping("/profile")
-    public String index(){
-        return "profile/index";
-    }
-
-    @GetMapping("/manage")
-    public String fragments(){
-        return "management/index";
-    }
-    @GetMapping("/admin")
-    public String admin(){
-        return "admin/index";
+        return "login";
     }
 
 
