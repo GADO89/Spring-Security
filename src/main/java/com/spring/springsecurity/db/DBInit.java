@@ -29,10 +29,34 @@ public class DBInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user=new User("ahmed","ahmed123","20","Alex",1);
-        user.setRoles( this.roleRepository.findAll());
-        user.setAuthorities( this.authoritiesRepository.findAll());
+        this.userRepository.deleteAll();
+        User admin=new User("ahmed","ahmed123","20","Alex",1);
+        admin.setRoles( this.roleRepository.findAll());
+        admin.setAuthorities( this.authoritiesRepository.findAll());
+        userRepository.save(admin);
+ ////////////////////////////////////////////////////////////////////////
+        User manager=new User("yasser","yasser123","20","Alex",1);
+        Role managerRoles1=roleRepository.findById(2L).get();
+        Role managerRoles2=roleRepository.findById(3L).get();
+        Authorities managerAuthorities1=authoritiesRepository.findById(2L).get();
+        Authorities managerAuthorities2=authoritiesRepository.findById(3L).get();
+        manager.getRoles().add(managerRoles1);
+        manager.getRoles().add(managerRoles2);
+        manager.getAuthorities().add(managerAuthorities1);
+        manager.getAuthorities().add(managerAuthorities2);
+        userRepository.save(manager);
+        ////////////////////////////////////////////
+        User user=new User("karim","karim123","20","Alex",1);
+        Role userRoles1=roleRepository.findById(3L).get();
+        Authorities userAuthorities1=authoritiesRepository.findById(3L).get();
+        user.getRoles().add(userRoles1);
+        user.getAuthorities().add(userAuthorities1);
         userRepository.save(user);
+
+
+
+
+
 
 
 

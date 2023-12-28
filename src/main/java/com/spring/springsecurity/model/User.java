@@ -1,6 +1,7 @@
 package com.spring.springsecurity.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 @Entity
@@ -26,14 +27,14 @@ public class User {
             joinColumns={@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
-    private List<Role> roles;
+    private List<Role> roles =new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_authorities",
             joinColumns={@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "authorities_id")}
-    )    private List<Authorities> authorities;
+    )    private List<Authorities> authorities =new ArrayList<>();
 
     public User() {
     }

@@ -2,6 +2,7 @@ package com.spring.springsecurity.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class Authorities {
     private String authoritiesName;
 
     @ManyToMany(mappedBy = "authorities")
-    private List<User> users;
+    private List<User> users =new ArrayList<>();
 
     public Authorities(String authoritiesName) {
         this.authoritiesName = authoritiesName;
