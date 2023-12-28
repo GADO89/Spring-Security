@@ -29,7 +29,9 @@ public class DBInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.userRepository.deleteAll();
+        User user=this.userRepository.findByUserName("karim");
+        System.out.println(user.getAddress());
+         /*this.userRepository.deleteAll();
         User admin=new User("ahmed","ahmed123","20","Alex",1);
         admin.setRoles( this.roleRepository.findAll());
         admin.setAuthorities( this.authoritiesRepository.findAll());
@@ -51,7 +53,7 @@ public class DBInit implements CommandLineRunner {
         Authorities userAuthorities1=authoritiesRepository.findById(3L).get();
         user.getRoles().add(userRoles1);
         user.getAuthorities().add(userAuthorities1);
-        userRepository.save(user);
+        userRepository.save(user); */
 
 
 
