@@ -1,8 +1,11 @@
 package com.spring.springsecurity.securityconfig;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,23 +15,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class securityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private UserPrincipleDetailsService userPrincipleDetailsService;
+
+    @Autowired
+    public securityConfiguration( UserPrincipleDetailsService userPrincipleDetailsService) {
+        this.userPrincipleDetailsService = userPrincipleDetailsService;
+    }
+
+    @Autowired
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("ahmed")
-                .password(passwordEncoder().encode("ahmed123"))
-               // .roles("ADMIN")
-                .authorities("ACCESS_BASIC1", "ROLE_ADMIN")
-                .and()
-                .withUser("yasser")
-                .password(passwordEncoder().encode("yasser123"))
-                //.roles("MANGER")
-                .authorities("ACCESS_BASIC2" ,"ROLE_MANGER")
-                .and()
-                .withUser("karim")
-                .password(passwordEncoder().encode("karim123"))
-                .roles("USER");
+        auth.authenticationProvider(authenticationProvider());
 
 
 
@@ -52,6 +52,13 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .httpBasic();
 
+    }
+    @Bean
+    DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider=new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userPrincipleDetailsService);
+        return daoAuthenticationProvider;
     }
 
     @Bean
