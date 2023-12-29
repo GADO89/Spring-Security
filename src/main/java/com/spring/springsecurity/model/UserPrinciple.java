@@ -25,7 +25,8 @@ public class UserPrinciple implements UserDetails {
             GrantedAuthority authority=new SimpleGrantedAuthority(p.getAuthoritiesName());
             authorities.add(authority);
         });
-               return authorities;
+
+        return authorities;
     }
 
     @Override

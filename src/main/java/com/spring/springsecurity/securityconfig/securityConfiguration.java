@@ -42,7 +42,7 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/main").permitAll()
             .antMatchers("/api/profile").authenticated()
             .antMatchers("/api/admin/**").hasRole("ADMIN")
-            .antMatchers("/api/manage").hasAnyRole("ADMIN","MANGER")
+            .antMatchers("/api/manage").hasAnyRole("ADMIN","MANAGER")
             .antMatchers("/api/basic/mybasic").hasAuthority("ACCESS_BASIC1")
             .antMatchers("/api/basic/allbasic").hasAuthority("ACCESS_BASIC2")
 

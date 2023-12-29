@@ -25,7 +25,8 @@ public class DBInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-         this.userRepository.deleteAll();
+
+       /*   this.userRepository.deleteAll();
         User admin=new User("ahmed", passwordEncoder.encode("ahmed123") ,"20","Alex",1);
         admin.setAuthorities( this.authoritiesRepository.findAll());
         userRepository.save(admin);
@@ -37,18 +38,23 @@ public class DBInit implements CommandLineRunner {
         Authorities managerAuthorities3=authoritiesRepository.findById(5L).get();
         Authorities managerAuthorities4=authoritiesRepository.findById(6L).get();
 
+
         manager.getAuthorities().add(managerAuthorities1);
         manager.getAuthorities().add(managerAuthorities2);
         manager.getAuthorities().add(managerAuthorities3);
         manager.getAuthorities().add(managerAuthorities4);
+
         userRepository.save(manager);
         ////////////////////////////////////////////
         User user=new User("karim",passwordEncoder.encode("karim123"),"20","Alex",1);
         Authorities userAuthorities1=authoritiesRepository.findById(3L).get();
         Authorities userAuthorities2=authoritiesRepository.findById(6L).get();
+        user.getAuthorities().add(userAuthorities2);
+        userRepository.save(user); */
 
-        user.getAuthorities().add(userAuthorities1);
-        userRepository.save(user);
+
+
+
 
 
 

@@ -22,6 +22,6 @@ public class UserPrincipleDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
        User user= userRepository.findByUserName(name);
         UserPrinciple userPrinciple=new UserPrinciple(user);
-        return null;
+        return userPrinciple;
     }
 }
