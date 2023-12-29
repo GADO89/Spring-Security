@@ -50,7 +50,10 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
 
             //.anyRequest().authenticated()
             .and()
-            .httpBasic();
+            .formLogin()
+            .loginPage("/api/login")
+            .permitAll();
+
 
     }
     @Bean
