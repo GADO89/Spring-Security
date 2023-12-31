@@ -51,14 +51,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilter(new JwtAuthenticationFilter(authenticationManager()))
             .addFilter(new JwtAuthorizationFilter(authenticationManager(),this.userRepository ))
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST,"/login").permitAll()
-            .antMatchers("/api/main").permitAll()
-            .antMatchers("/api/profile").authenticated()
-            .antMatchers("/api/admin/**").hasRole("ADMIN")
-            .antMatchers("/api/manage").hasAnyRole("ADMIN","MANAGER")
-            .antMatchers("/api/basic/mybasic").hasAuthority("ACCESS_BASIC1")
-            .antMatchers("/api/basic/allbasic").hasAuthority("ACCESS_BASIC2")
-
+            .antMatchers(HttpMethod.POST, "/login").permitAll()
+            .antMatchers("/api/myAdmin").hasRole("ADMIN")
+            .antMatchers("/api/myAdminManager").hasAnyRole("ADMIN", "MANAGER")
+            .antMatchers("/api/myAdminManagerUser").hasAnyRole("ADMIN", "MANAGER", "USER")
             .anyRequest().authenticated();
 
     }
